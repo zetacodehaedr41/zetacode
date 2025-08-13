@@ -34,6 +34,7 @@
             width: 90%;
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 15px;
         }
         
         /* Header Styles */
@@ -102,6 +103,7 @@
             color: white;
             font-size: 1.5rem;
             cursor: pointer;
+            z-index: 1001;
         }
         
         /* Hero Section */
@@ -438,6 +440,7 @@
             width: 50px;
             height: 3px;
             background: var(--gradient);
+            border-radius: 2px;
         }
         
         .footer-links {
@@ -467,7 +470,13 @@
             color: #94a3b8;
         }
         
-        /* Responsive Design */
+        /* Responsive Design - تحسينات للجوال */
+        @media (max-width: 1200px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+        }
+        
         @media (max-width: 992px) {
             .about-container {
                 flex-direction: column;
@@ -480,16 +489,6 @@
             .footer-container {
                 grid-template-columns: repeat(2, 1fr);
             }
-        }
-        
-        @media (max-width: 768px) {
-            nav ul {
-                display: none;
-            }
-            
-            .mobile-menu-btn {
-                display: block;
-            }
             
             .hero h1 {
                 font-size: 2.5rem;
@@ -498,13 +497,114 @@
             .hero p {
                 font-size: 1.1rem;
             }
+        }
+        
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: 0;
+                width: 70%;
+                height: 100vh;
+                background: rgba(15, 23, 42, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                padding: 80px 20px 20px;
+                z-index: 999;
+                box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
+                transition: transform 0.3s ease;
+                transform: translateX(100%);
+            }
+            
+            nav ul.active {
+                display: flex;
+                transform: translateX(0);
+            }
+            
+            nav ul li {
+                margin: 15px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .mobile-close-btn {
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                color: white;
+                font-size: 1.8rem;
+                background: none;
+                border: none;
+                cursor: pointer;
+                display: none;
+            }
+            
+            nav ul.active + .mobile-close-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
             
             .services-grid {
                 grid-template-columns: 1fr;
             }
             
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .section-title p {
+                font-size: 1rem;
+            }
+            
+            .about-content h2 {
+                font-size: 1.8rem;
+            }
+            
             .footer-container {
                 grid-template-columns: 1fr;
+            }
+            
+            .contact-info, .contact-form {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .logo h1 {
+                font-size: 1.5rem;
+            }
+            
+            .service-icon {
+                height: 150px;
+                font-size: 3rem;
+            }
+            
+            .btn {
+                padding: 0.7rem 1.5rem;
+                font-size: 1rem;
+            }
+            
+            .contact-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .social-links {
+                justify-content: center;
             }
         }
     </style>
@@ -518,14 +618,17 @@
                 <h1>ZetaCode</h1>
             </div>
             <nav>
-                <ul>
+                <ul id="navMenu">
                     <li><a href="#home">الرئيسية</a></li>
                     <li><a href="#services">خدماتنا</a></li>
                     <li><a href="#about">من نحن</a></li>
                     <li><a href="#contact">تواصل معنا</a></li>
                 </ul>
-                <button class="mobile-menu-btn">
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
                     <i class="fas fa-bars"></i>
+                </button>
+                <button class="mobile-close-btn" id="mobileCloseBtn">
+                    <i class="fas fa-times"></i>
                 </button>
             </nav>
         </div>
@@ -556,7 +659,6 @@
                     <div class="service-content">
                         <h3>تطوير تطبيقات الجوال</h3>
                         <p>نصمم ونطور تطبيقات الهواتف الذكية المخصصة لأنظمة أندرويد و iOS باستخدام أحدث التقنيات مثل Flutter و React Native و Kotlin/Swift</p>
-                      
                     </div>
                 </div>
                 
@@ -758,7 +860,7 @@
                 
                 <div class="contact-form">
                     <h3>أرسل رسالتك</h3>
-                    <form>
+                    <form id="contactForm">
                         <div class="form-group">
                             <label for="name">الاسم الكامل</label>
                             <input type="text" id="name" required>
@@ -851,28 +953,43 @@
                 document.querySelector(this.getAttribute('href')).scrollIntoView({
                     behavior: 'smooth'
                 });
-            });
-        });
-        
-        // Mobile menu toggle
-        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-        const navMenu = document.querySelector('nav ul');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
-        });
-        
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('nav a').forEach(link => {
-            link.addEventListener('click', () => {
+                
+                // Close mobile menu if open
                 if (window.innerWidth <= 768) {
-                    navMenu.style.display = 'none';
+                    document.getElementById('navMenu').classList.remove('active');
+                    document.getElementById('mobileCloseBtn').style.display = 'none';
                 }
             });
         });
         
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileCloseBtn = document.getElementById('mobileCloseBtn');
+        const navMenu = document.getElementById('navMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.add('active');
+            mobileCloseBtn.style.display = 'block';
+        });
+        
+        mobileCloseBtn.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            mobileCloseBtn.style.display = 'none';
+        });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (window.innerWidth <= 768 && navMenu.classList.contains('active') && 
+                !navMenu.contains(e.target) && 
+                e.target !== mobileMenuBtn && 
+                e.target !== mobileCloseBtn) {
+                navMenu.classList.remove('active');
+                mobileCloseBtn.style.display = 'none';
+            }
+        });
+        
         // Form submission
-        const contactForm = document.querySelector('.contact-form form');
+        const contactForm = document.getElementById('contactForm');
         if (contactForm) {
             contactForm.addEventListener('submit', (e) => {
                 e.preventDefault();
@@ -885,6 +1002,14 @@
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
             header.classList.toggle('sticky', window.scrollY > 0);
+        });
+        
+        // Close mobile menu on resize if screen becomes larger
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                mobileCloseBtn.style.display = 'none';
+            }
         });
     </script>
 </body>
