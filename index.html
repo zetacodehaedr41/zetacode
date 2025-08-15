@@ -6,14 +6,18 @@
     <title>ZetaCode - حلول تكنولوجيا البرمجيات والذكاء الاصطناعي</title>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         :root {
             --primary: #2563eb;
             --primary-dark: #1d4ed8;
             --secondary: #0ea5e9;
+            --accent: #8b5cf6;
             --dark: #0f172a;
+            --darker: #020617;
             --light: #f8fafc;
             --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --gradient-accent: linear-gradient(135deg, var(--primary), var(--accent));
         }
         
         * {
@@ -37,16 +41,22 @@
             padding: 0 15px;
         }
         
-        /* Header Styles */
+        /* Header Styles - تحسينات */
         header {
-            background: rgba(15, 23, 42, 0.95);
+            background: rgba(15, 23, 42, 0.98);
             backdrop-filter: blur(10px);
-            padding: 1rem 0;
+            padding: 0.8rem 0;
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.25);
         }
         
         .header-container {
@@ -59,6 +69,11 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.03);
         }
         
         .logo h1 {
@@ -73,12 +88,19 @@
         .logo-icon {
             color: var(--secondary);
             font-size: 2rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
         
         nav ul {
             display: flex;
             list-style: none;
-            gap: 2rem;
+            gap: 1.8rem;
         }
         
         nav a {
@@ -89,10 +111,25 @@
             transition: all 0.3s ease;
             padding: 0.5rem 0.8rem;
             border-radius: 5px;
+            position: relative;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
         }
         
         nav a:hover {
-            background: rgba(37, 99, 235, 0.2);
             color: var(--secondary);
         }
         
@@ -106,9 +143,10 @@
             z-index: 1001;
         }
         
-        /* Hero Section */
+        /* Hero Section - تحسينات */
         .hero {
-            background: url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                        url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
             height: 100vh;
             display: flex;
             align-items: center;
@@ -116,6 +154,7 @@
             color: white;
             text-align: center;
             padding-top: 70px;
+            overflow: hidden;
         }
         
         .hero::before {
@@ -125,7 +164,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: linear-gradient(45deg, rgba(37, 99, 235, 0.1), rgba(14, 165, 233, 0.1));
         }
         
         .hero-content {
@@ -139,19 +178,23 @@
         .hero h1 {
             font-size: 3.5rem;
             font-weight: 800;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
         }
         
         .hero p {
             font-size: 1.3rem;
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem;
             opacity: 0.9;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .btn {
             display: inline-block;
-            padding: 0.8rem 2rem;
+            padding: 0.9rem 2.2rem;
             background: var(--gradient);
             color: white;
             text-decoration: none;
@@ -161,70 +204,105 @@
             transition: all 0.3s ease;
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
         }
         
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.6);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.7);
         }
         
-        /* Services Section */
+        /* Services Section - تحسينات */
         .services {
-            padding: 5rem 0;
+            padding: 6rem 0;
             background-color: white;
         }
         
         .section-title {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 4rem;
         }
         
         .section-title h2 {
-            font-size: 2.5rem;
+            font-size: 2.7rem;
             color: var(--dark);
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
             position: relative;
             display: inline-block;
+            font-weight: 800;
         }
         
         .section-title h2::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
+            width: 100px;
+            height: 5px;
             background: var(--gradient);
-            border-radius: 2px;
+            border-radius: 3px;
         }
         
         .section-title p {
             color: #64748b;
             max-width: 700px;
             margin: 0 auto;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
+            line-height: 1.7;
         }
         
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2.5rem;
         }
         
         .service-card {
             background: white;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s ease;
             border: 1px solid #e2e8f0;
+            position: relative;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeUp 0.6s forwards;
+        }
+        
+        .service-card.visible {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        @keyframes fadeUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
         
         .service-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
         
         .service-icon {
@@ -235,46 +313,103 @@
             justify-content: center;
             font-size: 4rem;
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-icon::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: rotate(30deg);
         }
         
         .service-content {
-            padding: 1.5rem;
+            padding: 1.8rem;
         }
         
         .service-content h3 {
-            font-size: 1.4rem;
-            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
             color: var(--dark);
+            font-weight: 700;
         }
         
         .service-content p {
             color: #64748b;
             margin-bottom: 1.5rem;
+            line-height: 1.7;
         }
         
-        /* About Section */
+        .service-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .service-link:hover {
+            color: var(--primary-dark);
+            gap: 12px;
+        }
+        
+        /* About Section - تحسينات */
         .about {
-            padding: 5rem 0;
-            background: #f1f5f9;
+            padding: 6rem 0;
+            background: linear-gradient(to bottom, #f1f5f9, #e2e8f0);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40%;
+            height: 100%;
+            background: var(--gradient-accent);
+            opacity: 0.03;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 30% 100%);
         }
         
         .about-container {
             display: flex;
             align-items: center;
-            gap: 3rem;
+            gap: 4rem;
+            position: relative;
+            z-index: 1;
         }
         
         .about-image {
             flex: 1;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover {
+            transform: perspective(1000px) rotateY(0deg);
         }
         
         .about-image img {
             width: 100%;
             height: auto;
             display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
         }
         
         .about-content {
@@ -284,160 +419,265 @@
         .about-content h2 {
             font-size: 2.5rem;
             color: var(--dark);
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
+            font-weight: 800;
         }
         
         .about-content p {
             margin-bottom: 1.5rem;
             color: #475569;
-            font-size: 1.1rem;
+            font-size: 1.15rem;
+            line-height: 1.8;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            color: #64748b;
+            font-weight: 500;
         }
         
         .ceo-info {
             background: white;
-            padding: 1.5rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 1.8rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
             margin-top: 2rem;
-            border-left: 4px solid var(--primary);
+            border-right: 4px solid var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ceo-info::before {
+            content: '"';
+            position: absolute;
+            top: -30px;
+            right: 20px;
+            font-size: 8rem;
+            color: rgba(37, 99, 235, 0.05);
+            font-family: serif;
+            line-height: 1;
         }
         
         .ceo-info h4 {
             color: var(--primary);
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.7rem;
+            font-size: 1.3rem;
         }
         
-        /* Contact Section */
+        .ceo-info p {
+            margin-bottom: 0.8rem;
+            line-height: 1.7;
+        }
+        
+        /* Contact Section - تحسينات */
         .contact {
-            padding: 5rem 0;
+            padding: 6rem 0;
             background: white;
+            position: relative;
+        }
+        
+        .contact::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.03), transparent);
         }
         
         .contact-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 3rem;
+            gap: 4rem;
+            position: relative;
+            z-index: 1;
         }
         
         .contact-info {
             background: var(--gradient);
             color: white;
-            padding: 2.5rem;
-            border-radius: 15px;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-info::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -50px;
+            width: 250px;
+            height: 250px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
         }
         
         .contact-info h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
         }
         
         .contact-item {
             display: flex;
             align-items: flex-start;
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            gap: 1.5rem;
+            margin-bottom: 1.8rem;
+            position: relative;
+            z-index: 1;
         }
         
         .contact-icon {
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             margin-top: 5px;
+            min-width: 40px;
+            text-align: center;
         }
         
         .contact-details h4 {
-            font-size: 1.2rem;
-            margin-bottom: 0.3rem;
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-details p {
+            opacity: 0.9;
         }
         
         .social-links {
             display: flex;
-            gap: 1rem;
-            margin-top: 2rem;
+            gap: 1.2rem;
+            margin-top: 2.5rem;
+            flex-wrap: wrap;
         }
         
         .social-link {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 45px;
-            height: 45px;
-            background: rgba(255, 255, 255, 0.2);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.15);
             color: white;
             border-radius: 50%;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         
         .social-link:hover {
             background: white;
             color: var(--primary);
             transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
         .contact-form {
             background: #f8fafc;
-            padding: 2.5rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
         }
         
         .contact-form h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            margin-bottom: 2rem;
             color: var(--dark);
         }
         
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
         }
         
         .form-group label {
             display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
+            margin-bottom: 0.7rem;
+            font-weight: 600;
             color: var(--dark);
         }
         
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 0.8rem 1rem;
+            padding: 1rem 1.2rem;
             border: 1px solid #cbd5e1;
-            border-radius: 8px;
+            border-radius: 10px;
             font-family: 'Tajawal', sans-serif;
-            font-size: 1rem;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            outline: none;
         }
         
         .form-group textarea {
-            height: 150px;
+            height: 160px;
             resize: vertical;
         }
         
-        /* Footer */
+        /* Footer - تحسينات */
         footer {
-            background: var(--dark);
+            background: var(--darker);
             color: white;
-            padding: 4rem 0 2rem;
+            padding: 5rem 0 2rem;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient);
         }
         
         .footer-container {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
+            gap: 2.5rem;
         }
         
         .footer-col h4 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            margin-bottom: 1.8rem;
             position: relative;
-            padding-bottom: 0.5rem;
+            padding-bottom: 0.8rem;
         }
         
         .footer-col h4::after {
             content: '';
             position: absolute;
             bottom: 0;
-            left: 0;
-            width: 50px;
+            right: 0;
+            width: 60px;
             height: 3px;
             background: var(--gradient);
             border-radius: 2px;
@@ -448,32 +688,70 @@
         }
         
         .footer-links li {
-            margin-bottom: 0.8rem;
+            margin-bottom: 1rem;
         }
         
         .footer-links a {
             color: #cbd5e1;
             text-decoration: none;
             transition: all 0.3s ease;
+            display: block;
+            padding: 0.3rem 0;
         }
         
         .footer-links a:hover {
             color: var(--secondary);
-            padding-right: 5px;
+            transform: translateX(-5px);
         }
         
         .copyright {
             text-align: center;
-            padding-top: 2rem;
-            margin-top: 2rem;
+            padding-top: 3rem;
+            margin-top: 3rem;
             border-top: 1px solid #334155;
             color: #94a3b8;
+            font-size: 0.95rem;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 999;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
         
         /* Responsive Design - تحسينات للجوال */
         @media (max-width: 1200px) {
             .hero h1 {
                 font-size: 3rem;
+            }
+            
+            .footer-container {
+                gap: 2rem;
             }
         }
         
@@ -484,6 +762,7 @@
             
             .contact-container {
                 grid-template-columns: 1fr;
+                gap: 3rem;
             }
             
             .footer-container {
@@ -497,6 +776,10 @@
             .hero p {
                 font-size: 1.1rem;
             }
+            
+            .stats {
+                gap: 1.5rem;
+            }
         }
         
         @media (max-width: 768px) {
@@ -505,15 +788,15 @@
                 position: fixed;
                 top: 0;
                 right: 0;
-                width: 70%;
+                width: 280px;
                 height: 100vh;
                 background: rgba(15, 23, 42, 0.98);
                 backdrop-filter: blur(10px);
                 flex-direction: column;
-                padding: 80px 20px 20px;
+                padding: 80px 30px 30px;
                 z-index: 999;
                 box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2);
-                transition: transform 0.3s ease;
+                transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
                 transform: translateX(100%);
             }
             
@@ -532,8 +815,8 @@
             
             .mobile-close-btn {
                 position: absolute;
-                top: 20px;
-                left: 20px;
+                top: 25px;
+                left: 25px;
                 color: white;
                 font-size: 1.8rem;
                 background: none;
@@ -547,7 +830,7 @@
             }
             
             .hero h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             
             .hero p {
@@ -559,7 +842,7 @@
             }
             
             .section-title h2 {
-                font-size: 2rem;
+                font-size: 2.2rem;
             }
             
             .section-title p {
@@ -567,21 +850,29 @@
             }
             
             .about-content h2 {
-                font-size: 1.8rem;
+                font-size: 2rem;
+            }
+            
+            .contact-info, .contact-form {
+                padding: 2rem;
             }
             
             .footer-container {
                 grid-template-columns: 1fr;
             }
             
-            .contact-info, .contact-form {
-                padding: 1.5rem;
+            .back-to-top {
+                bottom: 20px;
+                left: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
             }
         }
         
         @media (max-width: 576px) {
             .hero h1 {
-                font-size: 1.8rem;
+                font-size: 1.9rem;
             }
             
             .logo h1 {
@@ -589,22 +880,28 @@
             }
             
             .service-icon {
-                height: 150px;
-                font-size: 3rem;
+                height: 180px;
+                font-size: 3.2rem;
             }
             
             .btn {
-                padding: 0.7rem 1.5rem;
+                padding: 0.8rem 1.8rem;
                 font-size: 1rem;
             }
             
             .contact-item {
                 flex-direction: column;
                 align-items: flex-start;
+                gap: 0.8rem;
             }
             
             .social-links {
-                justify-content: center;
+                justify-content: flex-start;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 1.5rem;
             }
         }
     </style>
@@ -637,9 +934,9 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-content">
-            <h1>مستقبل التكنولوجيا يبدأ مع ZetaCode</h1>
-            <p>حلول برمجية مبتكرة وتطبيقات ذكية وخدمات ذكاء اصطناعي متطورة لتأخذ عملك إلى المستوى التالي</p>
-            <a href="#services" class="btn">اكتشف خدماتنا</a>
+            <h1 class="animate__animated animate__fadeInDown">مستقبل التكنولوجيا يبدأ مع ZetaCode</h1>
+            <p class="animate__animated animate__fadeIn animate__delay-1s">حلول برمجية مبتكرة وتطبيقات ذكية وخدمات ذكاء اصطناعي متطورة لتأخذ عملك إلى المستوى التالي</p>
+            <a href="#services" class="btn animate__animated animate__fadeInUp animate__delay-1s">اكتشف خدماتنا</a>
         </div>
     </section>
 
@@ -659,6 +956,7 @@
                     <div class="service-content">
                         <h3>تطوير تطبيقات الجوال</h3>
                         <p>نصمم ونطور تطبيقات الهواتف الذكية المخصصة لأنظمة أندرويد و iOS باستخدام أحدث التقنيات مثل Flutter و React Native و Kotlin/Swift</p>
+                        <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
@@ -670,6 +968,7 @@
                     <div class="service-content">
                         <h3>تطوير المواقع الإلكترونية</h3>
                         <p>ننشئ مواقع إلكترونية احترافية تبدأ من التصميم المخصص إلى البرمجة الكاملة مع ضمان التوافق مع جميع الأجهزة وسرعة تحميل عالية</p>
+                        <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
@@ -681,6 +980,7 @@
                     <div class="service-content">
                         <h3>فحص أمني شامل</h3>
                         <p>نقدم خدمة مخصصة في تحليل الأمان وفحص الثغرات الأمنية في التطبيقات والمواقع الإلكترونية مع تقارير مفصلة وتوصيات تحسين</p>
+                        <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
@@ -692,6 +992,7 @@
                     <div class="service-content">
                         <h3>إدارة محتوى التواصل الاجتماعي</h3>
                         <p>خدمة استقبال ونشر المحتوى على منصات التواصل الاجتماعي مع إعداد محتوى احترافي وتصميمات جذابة ومتابعة التفاعل مع الجمهور</p>
+                        <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
@@ -703,6 +1004,7 @@
                     <div class="service-content">
                         <h3>أمن المعلومات واختبار الاختراق</h3>
                         <p>خدمات اختبار الاختراق الأخلاقي للكشف عن الثغرات الأمنية واختبار جاهزية الأنظمة ضد الهجمات السيبرانية</p>
+                        <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
@@ -714,6 +1016,7 @@
                     <div class="service-content">
                         <h3>الاستشارات التقنية</h3>
                         <p>خدمات استشارية تقنية تساعد المؤسسات في اتخاذ قرارات ذكية في اختيار التقنيات المناسبة أو تحسين البنية التحتية الرقمية</p>
+                        <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
@@ -725,6 +1028,7 @@
                     <div class="service-content">
                         <h3>منصات SaaS</h3>
                         <p>نطور أنظمة SaaS تعمل بنموذج الاشتراك الشهري مثل أدوات إدارة المشاريع، أنظمة المحاسبة وحلول إدارة الفرق</p>
+                        <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
@@ -736,6 +1040,7 @@
                     <div class="service-content">
                         <h3>البرمجيات المخصصة</h3>
                         <p>نصمم حلول برمجية مخصصة بالكامل حسب احتياج كل شركة تشمل أنظمة المحاسبة، الموارد البشرية، CRM و ERP</p>
+                        <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
@@ -747,6 +1052,7 @@
                     <div class="service-content">
                         <h3>تحسين الأداء والسرعة</h3>
                         <p>تحليل وتحسين الأداء العام للمواقع والتطبيقات بما في ذلك تقليل زمن التحميل وتحسين استهلاك الذاكرة</p>
+                        <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
@@ -758,6 +1064,7 @@
                     <div class="service-content">
                         <h3>الدعم الفني والصيانة</h3>
                         <p>خدمة دعم مستمرة تشمل متابعة دورية للأداء وإصلاح الأعطال بسرعة وتطبيق التحسينات وتحديث المحتوى والبرمجيات</p>
+                        <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
@@ -769,6 +1076,7 @@
                     <div class="service-content">
                         <h3>دمج الذكاء الاصطناعي</h3>
                         <p>حلول تعتمد على الذكاء الاصطناعي لتحسين تجربة المستخدم مثل محركات التوصية، شات بوتات وتحليل البيانات السلوكية</p>
+                        <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
             </div>
@@ -790,6 +1098,21 @@
                     <h2>الريادة في حلول التكنولوجيا المتقدمة</h2>
                     <p>تأسست ZetaCode بهدف تقديم حلول تكنولوجية متطورة تلبي احتياجات السوق الرقمي المتسارع. نتميز بفريق من الخبراء والمطورين المبدعين الذين يعملون على تقديم حلول مبتكرة تساعد عملائنا على النمو والتميز في سوقهم.</p>
                     <p>نؤمن في ZetaCode بأن التكنولوجيا ليست مجرد أدوات، بل هي حلول استراتيجية يمكنها تحويل الأعمال وخلق فرص جديدة. لذلك نركز على فهم احتياجات عملائنا بدقة لتصميم حلول مخصصة تدفعهم نحو النجاح.</p>
+                    
+                    <div class="stats">
+                        <div class="stat-item">
+                            <div class="stat-number">150+</div>
+                            <div class="stat-label">مشروع مكتمل</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">40+</div>
+                            <div class="stat-label">خبير تقني</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">12</div>
+                            <div class="stat-label">جائزة تقنية</div>
+                        </div>
+                    </div>
                     
                     <div class="ceo-info">
                         <h4>الرئيس التنفيذي</h4>
@@ -838,7 +1161,8 @@
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
                         <div class="contact-details">
-                            <h4>تابعنا على</h4>
+                            <h4>المكتب الرئيسي</h4>
+                            <p>دمشق، سوريا</p>
                         </div>
                     </div>
                     
@@ -863,19 +1187,19 @@
                     <form id="contactForm">
                         <div class="form-group">
                             <label for="name">الاسم الكامل</label>
-                            <input type="text" id="name" required>
+                            <input type="text" id="name" required placeholder="اكتب اسمك هنا">
                         </div>
                         <div class="form-group">
                             <label for="email">البريد الإلكتروني</label>
-                            <input type="email" id="email" required>
+                            <input type="email" id="email" required placeholder="example@domain.com">
                         </div>
                         <div class="form-group">
                             <label for="phone">رقم الهاتف</label>
-                            <input type="tel" id="phone">
+                            <input type="tel" id="phone" placeholder="+963 123 456 789">
                         </div>
                         <div class="form-group">
                             <label for="message">الرسالة</label>
-                            <textarea id="message" required></textarea>
+                            <textarea id="message" required placeholder="اكتب رسالتك هنا..."></textarea>
                         </div>
                         <button type="submit" class="btn">إرسال الرسالة</button>
                     </form>
@@ -934,6 +1258,7 @@
                         <li><i class="fas fa-phone"></i> +963 937 334 962</li>
                         <li><i class="fas fa-phone"></i> +963 988 422 863</li>
                         <li><i class="fas fa-envelope"></i> zetacode41@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> دمشق، سوريا</li>
                     </ul>
                 </div>
             </div>
@@ -943,6 +1268,11 @@
             </div>
         </div>
     </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
 
     <script>
         // Smooth scrolling for anchor links
@@ -993,15 +1323,54 @@
         if (contactForm) {
             contactForm.addEventListener('submit', (e) => {
                 e.preventDefault();
-                alert('تم إرسال رسالتك بنجاح! سنتصل بك قريبًا.');
-                contactForm.reset();
+                
+                // Show success message with animation
+                const submitBtn = contactForm.querySelector('.btn');
+                const originalBtnText = submitBtn.innerHTML;
+                
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جارٍ الإرسال...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    submitBtn.innerHTML = '<i class="fas fa-check"></i> تم الإرسال بنجاح!';
+                    submitBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                    
+                    setTimeout(() => {
+                        contactForm.reset();
+                        submitBtn.innerHTML = originalBtnText;
+                        submitBtn.disabled = false;
+                        submitBtn.style.background = '';
+                    }, 2000);
+                }, 1500);
             });
         }
         
         // Sticky header on scroll
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
-            header.classList.toggle('sticky', window.scrollY > 0);
+            const backToTop = document.getElementById('backToTop');
+            
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            // Show back to top button
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+        
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
         
         // Close mobile menu on resize if screen becomes larger
@@ -1011,6 +1380,23 @@
                 mobileCloseBtn.style.display = 'none';
             }
         });
+        
+        // Animation for service cards on scroll
+        const serviceCards = document.querySelectorAll('.service-card');
+        
+        const animateOnScroll = () => {
+            serviceCards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (cardTop < windowHeight * 0.85 && !card.classList.contains('visible')) {
+                    card.classList.add('visible');
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
     </script>
 </body>
 </html>
