@@ -181,6 +181,7 @@
             margin-bottom: 1.5rem;
             line-height: 1.2;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            animation: fadeInOut 6s infinite;
         }
         
         .hero p {
@@ -190,6 +191,12 @@
             max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            animation: fadeInOut 6s infinite 2s;
+        }
+        
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0.9; transform: translateY(0); }
+            50% { opacity: 1; transform: translateY(-10px); }
         }
         
         .btn {
@@ -247,6 +254,12 @@
             position: relative;
             display: inline-block;
             font-weight: 800;
+            animation: slideInOut 8s infinite;
+        }
+        
+        @keyframes slideInOut {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-20px); }
         }
         
         .section-title h2::after {
@@ -267,11 +280,12 @@
             margin: 0 auto;
             font-size: 1.15rem;
             line-height: 1.7;
+            animation: fadeInOut 8s infinite 1s;
         }
         
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
             gap: 2.5rem;
         }
         
@@ -286,6 +300,9 @@
             transform: translateY(20px);
             opacity: 0;
             animation: fadeUp 0.6s forwards;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
         }
         
         .service-card.visible {
@@ -305,31 +322,40 @@
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
         }
         
-        .service-icon {
+        .service-image {
             height: 200px;
-            background: var(--gradient);
+            background-size: cover;
+            background-position: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 4rem;
-            color: white;
             position: relative;
             overflow: hidden;
         }
         
-        .service-icon::after {
+        .service-image::after {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: rgba(255, 255, 255, 0.1);
-            transform: rotate(30deg);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0.7;
+        }
+        
+        .service-icon {
+            position: relative;
+            z-index: 2;
+            font-size: 3.5rem;
+            color: white;
         }
         
         .service-content {
             padding: 1.8rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
         
         .service-content h3 {
@@ -343,6 +369,7 @@
             color: #64748b;
             margin-bottom: 1.5rem;
             line-height: 1.7;
+            flex-grow: 1;
         }
         
         .service-link {
@@ -353,6 +380,7 @@
             align-items: center;
             gap: 8px;
             transition: all 0.3s ease;
+            margin-top: auto;
         }
         
         .service-link:hover {
@@ -486,6 +514,43 @@
         .ceo-info p {
             margin-bottom: 0.8rem;
             line-height: 1.7;
+        }
+        
+        .founders {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .founder {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .founder i {
+            color: var(--primary);
+        }
+        
+        .whatsapp-contact {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #25D366;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-top: 0.5rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-contact:hover {
+            background: #128C7E;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(18, 140, 126, 0.4);
         }
         
         /* Contact Section - تحسينات */
@@ -879,8 +944,11 @@
                 font-size: 1.5rem;
             }
             
-            .service-icon {
+            .service-image {
                 height: 180px;
+            }
+            
+            .service-icon {
                 font-size: 3.2rem;
             }
             
@@ -902,6 +970,10 @@
             .stats {
                 flex-direction: column;
                 gap: 1.5rem;
+            }
+            
+            .founders {
+                flex-direction: column;
             }
         }
     </style>
@@ -950,132 +1022,132 @@
             <div class="services-grid">
                 <!-- Service 1 -->
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-mobile-alt"></i>
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
+                        <i class="fas fa-mobile-alt service-icon"></i>
                     </div>
                     <div class="service-content">
                         <h3>تطوير تطبيقات الجوال</h3>
-                        <p>نصمم ونطور تطبيقات الهواتف الذكية المخصصة لأنظمة أندرويد و iOS باستخدام أحدث التقنيات مثل Flutter و React Native و Kotlin/Swift</p>
+                        <p>نصمم ونطور تطبيقات الهواتف الذكية المخصصة لأنظمة أندرويد و iOS باستخدام أحدث التقنيات مثل Flutter و React Native و Kotlin/Swift. نضمن تصميم واجهات مستخدم جذابة وسهلة الاستخدام مع أداء عالي وسرعة استجابة مثالية. نقدم حلولاً متكاملة تشمل التصميم، البرمجة، الاختبار، النشر والمتابعة المستمرة.</p>
                         <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
                 <!-- Service 2 -->
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-laptop-code"></i>
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
+                        <i class="fas fa-laptop-code service-icon"></i>
                     </div>
                     <div class="service-content">
                         <h3>تطوير المواقع الإلكترونية</h3>
-                        <p>ننشئ مواقع إلكترونية احترافية تبدأ من التصميم المخصص إلى البرمجة الكاملة مع ضمان التوافق مع جميع الأجهزة وسرعة تحميل عالية</p>
+                        <p>ننشئ مواقع إلكترونية احترافية تبدأ من التصميم المخصص إلى البرمجة الكاملة مع ضمان التوافق مع جميع الأجهزة وسرعة تحميل عالية. نستخدم أحدث تقنيات الويب مثل HTML5، CSS3، JavaScript، React، Vue.js، Laravel وغيرها. نضمن تصميم مواقع متجاوبة مع جميع الشاشات ومتوافقة مع محركات البحث SEO.</p>
                         <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
                 <!-- Service 3 -->
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-shield-alt"></i>
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
+                        <i class="fas fa-shield-alt service-icon"></i>
                     </div>
                     <div class="service-content">
                         <h3>فحص أمني شامل</h3>
-                        <p>نقدم خدمة مخصصة في تحليل الأمان وفحص الثغرات الأمنية في التطبيقات والمواقع الإلكترونية مع تقارير مفصلة وتوصيات تحسين</p>
+                        <p>نقدم خدمة مخصصة في تحليل الأمان وفحص الثغرات الأمنية في التطبيقات والمواقع الإلكترونية مع تقارير مفصلة وتوصيات تحسين. نستخدم أحدث أدوات الفحص الأمني ونقوم باختبارات الاختراق المحاكية لتحديد نقاط الضعف ومعالجتها قبل استغلالها. نضمن حماية بياناتك ومعلومات عملائك من الهجمات الإلكترونية.</p>
                         <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
                 <!-- Service 4 -->
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-hashtag"></i>
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
+                        <i class="fas fa-hashtag service-icon"></i>
                     </div>
                     <div class="service-content">
                         <h3>إدارة محتوى التواصل الاجتماعي</h3>
-                        <p>خدمة استقبال ونشر المحتوى على منصات التواصل الاجتماعي مع إعداد محتوى احترافي وتصميمات جذابة ومتابعة التفاعل مع الجمهور</p>
+                        <p>خدمة استقبال ونشر المحتوى على منصات التواصل الاجتماعي مع إعداد محتوى احترافي وتصميمات جذابة ومتابعة التفاعل مع الجمهور. نطور استراتيجيات متكاملة لزيادة التفاعل والوصول إلى الجمهور المستهدف. نقدم تحليلات دورية لأداء المحتوى وتقديم توصيات للتحسين المستمر.</p>
                         <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
                 <!-- Service 5 -->
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-user-secret"></i>
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
+                        <i class="fas fa-user-secret service-icon"></i>
                     </div>
                     <div class="service-content">
                         <h3>أمن المعلومات واختبار الاختراق</h3>
-                        <p>خدمات اختبار الاختراق الأخلاقي للكشف عن الثغرات الأمنية واختبار جاهزية الأنظمة ضد الهجمات السيبرانية</p>
+                        <p>خدمات اختبار الاختراق الأخلاقي للكشف عن الثغرات الأمنية واختبار جاهزية الأنظمة ضد الهجمات السيبرانية. نقوم بتقييم شامل للبنية التحتية التقنية وتحديد نقاط الضعف وتقديم حلول أمنية متكاملة. نضمن حماية شاملة لبياناتك وأنظمتك من التهديدات الإلكترونية المتطورة.</p>
                         <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
                 <!-- Service 6 -->
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-headset"></i>
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
+                        <i class="fas fa-headset service-icon"></i>
                     </div>
                     <div class="service-content">
                         <h3>الاستشارات التقنية</h3>
-                        <p>خدمات استشارية تقنية تساعد المؤسسات في اتخاذ قرارات ذكية في اختيار التقنيات المناسبة أو تحسين البنية التحتية الرقمية</p>
+                        <p>خدمات استشارية تقنية تساعد المؤسسات في اتخاذ قرارات ذكية في اختيار التقنيات المناسبة أو تحسين البنية التحتية الرقمية. نقدم تحليلات متعمقة للاحتياجات التقنية وتقديم حلول مخصصة تتناسب مع أهداف العمل وميزانيته. نضمن تحسين الأداء التقني وزيادة الكفاءة التشغيلية.</p>
                         <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
                 <!-- Service 7 -->
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-cloud"></i>
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
+                        <i class="fas fa-cloud service-icon"></i>
                     </div>
                     <div class="service-content">
                         <h3>منصات SaaS</h3>
-                        <p>نطور أنظمة SaaS تعمل بنموذج الاشتراك الشهري مثل أدوات إدارة المشاريع، أنظمة المحاسبة وحلول إدارة الفرق</p>
+                        <p>نطور أنظمة SaaS تعمل بنموذج الاشتراك الشهري مثل أدوات إدارة المشاريع، أنظمة المحاسبة وحلول إدارة الفرق. نضمن تصميم واجهات مستخدم سهلة الاستخدام مع أداء عالي وأمان متقدم. نقدم حلولاً قابلة للتطوير والتخصيص وفقاً لاحتياجات العمل المختلفة.</p>
                         <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
                 <!-- Service 8 -->
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-cogs"></i>
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
+                        <i class="fas fa-cogs service-icon"></i>
                     </div>
                     <div class="service-content">
                         <h3>البرمجيات المخصصة</h3>
-                        <p>نصمم حلول برمجية مخصصة بالكامل حسب احتياج كل شركة تشمل أنظمة المحاسبة، الموارد البشرية، CRM و ERP</p>
+                        <p>نصمم حلول برمجية مخصصة بالكامل حسب احتياج كل شركة تشمل أنظمة المحاسبة، الموارد البشرية، CRM و ERP. نضمن تطوير حلول متكاملة تلبي احتياجات العمل المحددة مع واجهات سهلة الاستخدام وإمكانيات متقدمة. نقدم دعمًا فنيًا مستمرًا وتحديثات دورية للحلول المقدمة.</p>
                         <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
                 <!-- Service 9 -->
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-tachometer-alt"></i>
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
+                        <i class="fas fa-tachometer-alt service-icon"></i>
                     </div>
                     <div class="service-content">
                         <h3>تحسين الأداء والسرعة</h3>
-                        <p>تحليل وتحسين الأداء العام للمواقع والتطبيقات بما في ذلك تقليل زمن التحميل وتحسين استهلاك الذاكرة</p>
+                        <p>تحليل وتحسين الأداء العام للمواقع والتطبيقات بما في ذلك تقليل زمن التحميل وتحسين استهلاك الذاكرة. نستخدم أدوات متقدمة لتحليل الأداء وتحديد نقاط الضعف وتطبيق تحسينات شاملة. نضمن تحسين تجربة المستخدم وزيادة معدلات التحويل وتحسين ترتيب محركات البحث.</p>
                         <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
                 <!-- Service 10 -->
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-tools"></i>
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
+                        <i class="fas fa-tools service-icon"></i>
                     </div>
                     <div class="service-content">
                         <h3>الدعم الفني والصيانة</h3>
-                        <p>خدمة دعم مستمرة تشمل متابعة دورية للأداء وإصلاح الأعطال بسرعة وتطبيق التحسينات وتحديث المحتوى والبرمجيات</p>
+                        <p>خدمة دعم مستمرة تشمل متابعة دورية للأداء وإصلاح الأعطال بسرعة وتطبيق التحسينات وتحديث المحتوى والبرمجيات. نضمن استمرارية عمل الأنظمة والتطبيقات مع أداء مثالي وأمان متقدم. نقدم خطط دعم مرنة تتناسب مع احتياجات العمل المختلفة.</p>
                         <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
                 <!-- Service 11 -->
                 <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-brain"></i>
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1677442136019-21780ecad995?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
+                        <i class="fas fa-brain service-icon"></i>
                     </div>
                     <div class="service-content">
                         <h3>دمج الذكاء الاصطناعي</h3>
-                        <p>حلول تعتمد على الذكاء الاصطناعي لتحسين تجربة المستخدم مثل محركات التوصية، شات بوتات وتحليل البيانات السلوكية</p>
+                        <p>حلول تعتمد على الذكاء الاصطناعي لتحسين تجربة المستخدم مثل محركات التوصية، شات بوتات وتحليل البيانات السلوكية. نستخدم تقنيات الذكاء الاصطناعي والتعلم الآلي لتطوير حلول ذكية تتنبأ باحتياجات المستخدمين وتوفر تجارب مخصصة. نضمن تطوير نماذج ذكية قابلة للتطوير والتكيف مع البيانات الجديدة.</p>
                         <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
@@ -1115,9 +1187,22 @@
                     </div>
                     
                     <div class="ceo-info">
-                        <h4>الرئيس التنفيذي</h4>
-                        <p>حيدر غياث محفوض</p>
+                        <h4>المؤسسون</h4>
+                        <div class="founders">
+                            <div class="founder">
+                                <i class="fas fa-user"></i>
+                                <span>حيدر غياث محفوض</span>
+                            </div>
+                            <div class="founder">
+                                <i class="fas fa-user"></i>
+                                <span>ابراهيم اصف حيروقة</span>
+                            </div>
+                        </div>
                         <p>"في ZetaCode، نلتزم بتقديم حلول تكنولوجية استثنائية لا تلبي احتياجات عملائنا فحسب، بل تتجاوز توقعاتهم. رؤيتنا هي أن نكون الشريك التقني الموثوق الذي يقود التحول الرقمي في المنطقة."</p>
+                        <a href="https://wa.me/963988422863" class="whatsapp-contact" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                            تواصل معنا عبر واتساب +963988422863
+                        </a>
                     </div>
                 </div>
             </div>
@@ -1141,7 +1226,6 @@
                         </div>
                         <div class="contact-details">
                             <h4>الهاتف</h4>
-                            <p>+963 937 334 962</p>
                             <p>+963 988 422 863</p>
                         </div>
                     </div>
@@ -1255,7 +1339,6 @@
                 <div class="footer-col">
                     <h4>اتصل بنا</h4>
                     <ul class="footer-links">
-                        <li><i class="fas fa-phone"></i> +963 937 334 962</li>
                         <li><i class="fas fa-phone"></i> +963 988 422 863</li>
                         <li><i class="fas fa-envelope"></i> zetacode41@gmail.com</li>
                         <li><i class="fas fa-map-marker-alt"></i> دمشق، سوريا</li>
