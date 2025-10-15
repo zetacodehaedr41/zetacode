@@ -372,22 +372,6 @@
             flex-grow: 1;
         }
         
-        .service-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-            margin-top: auto;
-        }
-        
-        .service-link:hover {
-            color: var(--primary-dark);
-            gap: 12px;
-        }
-        
         /* About Section - تحسينات */
         .about {
             padding: 6rem 0;
@@ -553,6 +537,62 @@
             box-shadow: 0 5px 15px rgba(18, 140, 126, 0.4);
         }
         
+        /* Consultation Section */
+        .consultation {
+            padding: 6rem 0;
+            background: linear-gradient(to bottom, #e2e8f0, #f1f5f9);
+        }
+        
+        .consultation-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .consultation-form h3 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--dark);
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.7rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 10px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+            outline: none;
+        }
+        
+        .form-group textarea {
+            height: 160px;
+            resize: vertical;
+        }
+        
         /* Contact Section - تحسينات */
         .contact {
             padding: 6rem 0;
@@ -670,40 +710,6 @@
             font-size: 2rem;
             margin-bottom: 2rem;
             color: var(--dark);
-        }
-        
-        .form-group {
-            margin-bottom: 1.8rem;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 0.7rem;
-            font-weight: 600;
-            color: var(--dark);
-        }
-        
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 1rem 1.2rem;
-            border: 1px solid #cbd5e1;
-            border-radius: 10px;
-            font-family: 'Tajawal', sans-serif;
-            font-size: 1.05rem;
-            transition: all 0.3s ease;
-        }
-        
-        .form-group input:focus,
-        .form-group textarea:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-            outline: none;
-        }
-        
-        .form-group textarea {
-            height: 160px;
-            resize: vertical;
         }
         
         /* Footer - تحسينات */
@@ -991,6 +997,7 @@
                     <li><a href="#home">الرئيسية</a></li>
                     <li><a href="#services">خدماتنا</a></li>
                     <li><a href="#about">من نحن</a></li>
+                    <li><a href="#consultation">الاستشارات</a></li>
                     <li><a href="#contact">تواصل معنا</a></li>
                 </ul>
                 <button class="mobile-menu-btn" id="mobileMenuBtn">
@@ -1028,7 +1035,6 @@
                     <div class="service-content">
                         <h3>تطوير تطبيقات الجوال</h3>
                         <p>نصمم ونطور تطبيقات الهواتف الذكية المخصصة لأنظمة أندرويد و iOS باستخدام أحدث التقنيات مثل Flutter و React Native و Kotlin/Swift. نضمن تصميم واجهات مستخدم جذابة وسهلة الاستخدام مع أداء عالي وسرعة استجابة مثالية. نقدم حلولاً متكاملة تشمل التصميم، البرمجة، الاختبار، النشر والمتابعة المستمرة.</p>
-                        <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
@@ -1040,7 +1046,6 @@
                     <div class="service-content">
                         <h3>تطوير المواقع الإلكترونية</h3>
                         <p>ننشئ مواقع إلكترونية احترافية تبدأ من التصميم المخصص إلى البرمجة الكاملة مع ضمان التوافق مع جميع الأجهزة وسرعة تحميل عالية. نستخدم أحدث تقنيات الويب مثل HTML5، CSS3، JavaScript، React، Vue.js، Laravel وغيرها. نضمن تصميم مواقع متجاوبة مع جميع الشاشات ومتوافقة مع محركات البحث SEO.</p>
-                        <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
@@ -1052,19 +1057,17 @@
                     <div class="service-content">
                         <h3>فحص أمني شامل</h3>
                         <p>نقدم خدمة مخصصة في تحليل الأمان وفحص الثغرات الأمنية في التطبيقات والمواقع الإلكترونية مع تقارير مفصلة وتوصيات تحسين. نستخدم أحدث أدوات الفحص الأمني ونقوم باختبارات الاختراق المحاكية لتحديد نقاط الضعف ومعالجتها قبل استغلالها. نضمن حماية بياناتك ومعلومات عملائك من الهجمات الإلكترونية.</p>
-                        <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
                 <!-- Service 4 -->
                 <div class="service-card">
-                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
-                        <i class="fas fa-hashtag service-icon"></i>
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
+                        <i class="fas fa-chart-line service-icon"></i>
                     </div>
                     <div class="service-content">
-                        <h3>إدارة محتوى التواصل الاجتماعي</h3>
-                        <p>خدمة استقبال ونشر المحتوى على منصات التواصل الاجتماعي مع إعداد محتوى احترافي وتصميمات جذابة ومتابعة التفاعل مع الجمهور. نطور استراتيجيات متكاملة لزيادة التفاعل والوصول إلى الجمهور المستهدف. نقدم تحليلات دورية لأداء المحتوى وتقديم توصيات للتحسين المستمر.</p>
-                        <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
+                        <h3>تحليل الأعمال</h3>
+                        <p>نقدم خدمات تحليل الأعمال الشاملة التي تساعد في فهم العمليات التجارية وتحديد نقاط القوة والضعف والفرص المتاحة. نستخدم منهجيات تحليل متقدمة لتحديد احتياجات العمل وتحسين العمليات وزيادة الكفاءة التشغيلية. نضمن تقديم توصيات عملية قابلة للتطوير تعزز من أداء الأعمال وترفع من قدرتها التنافسية.</p>
                     </div>
                 </div>
                 
@@ -1076,7 +1079,6 @@
                     <div class="service-content">
                         <h3>أمن المعلومات واختبار الاختراق</h3>
                         <p>خدمات اختبار الاختراق الأخلاقي للكشف عن الثغرات الأمنية واختبار جاهزية الأنظمة ضد الهجمات السيبرانية. نقوم بتقييم شامل للبنية التحتية التقنية وتحديد نقاط الضعف وتقديم حلول أمنية متكاملة. نضمن حماية شاملة لبياناتك وأنظمتك من التهديدات الإلكترونية المتطورة.</p>
-                        <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
@@ -1088,7 +1090,6 @@
                     <div class="service-content">
                         <h3>الاستشارات التقنية</h3>
                         <p>خدمات استشارية تقنية تساعد المؤسسات في اتخاذ قرارات ذكية في اختيار التقنيات المناسبة أو تحسين البنية التحتية الرقمية. نقدم تحليلات متعمقة للاحتياجات التقنية وتقديم حلول مخصصة تتناسب مع أهداف العمل وميزانيته. نضمن تحسين الأداء التقني وزيادة الكفاءة التشغيلية.</p>
-                        <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
@@ -1100,7 +1101,6 @@
                     <div class="service-content">
                         <h3>منصات SaaS</h3>
                         <p>نطور أنظمة SaaS تعمل بنموذج الاشتراك الشهري مثل أدوات إدارة المشاريع، أنظمة المحاسبة وحلول إدارة الفرق. نضمن تصميم واجهات مستخدم سهلة الاستخدام مع أداء عالي وأمان متقدم. نقدم حلولاً قابلة للتطوير والتخصيص وفقاً لاحتياجات العمل المختلفة.</p>
-                        <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
@@ -1112,7 +1112,6 @@
                     <div class="service-content">
                         <h3>البرمجيات المخصصة</h3>
                         <p>نصمم حلول برمجية مخصصة بالكامل حسب احتياج كل شركة تشمل أنظمة المحاسبة، الموارد البشرية، CRM و ERP. نضمن تطوير حلول متكاملة تلبي احتياجات العمل المحددة مع واجهات سهلة الاستخدام وإمكانيات متقدمة. نقدم دعمًا فنيًا مستمرًا وتحديثات دورية للحلول المقدمة.</p>
-                        <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
@@ -1124,7 +1123,6 @@
                     <div class="service-content">
                         <h3>تحسين الأداء والسرعة</h3>
                         <p>تحليل وتحسين الأداء العام للمواقع والتطبيقات بما في ذلك تقليل زمن التحميل وتحسين استهلاك الذاكرة. نستخدم أدوات متقدمة لتحليل الأداء وتحديد نقاط الضعف وتطبيق تحسينات شاملة. نضمن تحسين تجربة المستخدم وزيادة معدلات التحويل وتحسين ترتيب محركات البحث.</p>
-                        <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
@@ -1136,7 +1134,6 @@
                     <div class="service-content">
                         <h3>الدعم الفني والصيانة</h3>
                         <p>خدمة دعم مستمرة تشمل متابعة دورية للأداء وإصلاح الأعطال بسرعة وتطبيق التحسينات وتحديث المحتوى والبرمجيات. نضمن استمرارية عمل الأنظمة والتطبيقات مع أداء مثالي وأمان متقدم. نقدم خطط دعم مرنة تتناسب مع احتياجات العمل المختلفة.</p>
-                        <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
                     </div>
                 </div>
                 
@@ -1146,9 +1143,19 @@
                         <i class="fas fa-brain service-icon"></i>
                     </div>
                     <div class="service-content">
-                        <h3>دمج الذكاء الاصطناعي</h3>
-                        <p>حلول تعتمد على الذكاء الاصطناعي لتحسين تجربة المستخدم مثل محركات التوصية، شات بوتات وتحليل البيانات السلوكية. نستخدم تقنيات الذكاء الاصطناعي والتعلم الآلي لتطوير حلول ذكية تتنبأ باحتياجات المستخدمين وتوفر تجارب مخصصة. نضمن تطوير نماذج ذكية قابلة للتطوير والتكيف مع البيانات الجديدة.</p>
-                        <a href="#" class="service-link">تعرف أكثر <i class="fas fa-arrow-left"></i></a>
+                        <h3>الذكاء الاصطناعي المتقدم</h3>
+                        <p>نطور حلول ذكاء اصطناعي متقدمة تشمل نماذج التعلم الآلي، معالجة اللغات الطبيعية، الرؤية الحاسوبية وأنظمة التوصية الذكية. نستخدم أحدث تقنيات الذكاء الاصطناعي لتحليل البيانات الضخمة واستخراج الرؤى القيمة واتخاذ القرارات الذكية. نضمن تطوير نماذج قابلة للتطوير والتكيف مع البيانات الجديدة.</p>
+                    </div>
+                </div>
+                
+                <!-- Service 12 -->
+                <div class="service-card">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80')">
+                        <i class="fas fa-database service-icon"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>تحليل البيانات</h3>
+                        <p>نقدم خدمات تحليل البيانات المتقدمة باستخدام أحدث الأدوات والتقنيات لاستخراج الرؤى القيمة من البيانات. نطور لوحات تحكم تفاعلية وتقارير مخصصة تساعد في اتخاذ القرارات المستندة إلى البيانات. نضمن تحليل البيانات الضخمة وتقديم توصيات عملية لتحسين الأداء وزيادة الإيرادات.</p>
                     </div>
                 </div>
             </div>
@@ -1209,6 +1216,34 @@
         </div>
     </section>
 
+    <!-- Consultation Section -->
+    <section id="consultation" class="consultation">
+        <div class="container">
+            <div class="section-title">
+                <h2>طلب استشارة</h2>
+                <p>أخبرنا عن احتياجاتك وسنقدم لك استشارة مجانية عبر واتساب</p>
+            </div>
+            <div class="consultation-form">
+                <h3>اطلب استشارة مجانية</h3>
+                <form id="consultationForm">
+                    <div class="form-group">
+                        <label for="consultationName">الاسم الكامل</label>
+                        <input type="text" id="consultationName" required placeholder="اكتب اسمك هنا">
+                    </div>
+                    <div class="form-group">
+                        <label for="consultationPhone">رقم الهاتف</label>
+                        <input type="tel" id="consultationPhone" required placeholder="+963 123 456 789">
+                    </div>
+                    <div class="form-group">
+                        <label for="consultationMessage">تفاصيل الاستشارة</label>
+                        <textarea id="consultationMessage" required placeholder="اخبرنا عن احتياجاتك ومتطلباتك..."></textarea>
+                    </div>
+                    <button type="submit" class="btn">إرسال الطلب عبر واتساب</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
@@ -1226,7 +1261,7 @@
                         </div>
                         <div class="contact-details">
                             <h4>الهاتف</h4>
-                            <p>+963 988 422 863</p>
+                            <p>+963 992 126 395</p>
                         </div>
                     </div>
                     
@@ -1321,6 +1356,7 @@
                         <li><a href="#home">الرئيسية</a></li>
                         <li><a href="#services">خدماتنا</a></li>
                         <li><a href="#about">من نحن</a></li>
+                        <li><a href="#consultation">الاستشارات</a></li>
                         <li><a href="#contact">تواصل معنا</a></li>
                     </ul>
                 </div>
@@ -1339,7 +1375,7 @@
                 <div class="footer-col">
                     <h4>اتصل بنا</h4>
                     <ul class="footer-links">
-                        <li><i class="fas fa-phone"></i> +963 988 422 863</li>
+                        <li><i class="fas fa-phone"></i> +963 992 126 395</li>
                         <li><i class="fas fa-envelope"></i> zetacode41@gmail.com</li>
                         <li><i class="fas fa-map-marker-alt"></i> دمشق، سوريا</li>
                     </ul>
@@ -1425,6 +1461,37 @@
                         submitBtn.style.background = '';
                     }, 2000);
                 }, 1500);
+            });
+        }
+        
+        // Consultation form submission
+        const consultationForm = document.getElementById('consultationForm');
+        if (consultationForm) {
+            consultationForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('consultationName').value;
+                const phone = document.getElementById('consultationPhone').value;
+                const message = document.getElementById('consultationMessage').value;
+                
+                // Format the message for WhatsApp
+                const whatsappMessage = `طلب استشارة جديدة%0A%0Aالاسم: ${name}%0Aرقم الهاتف: ${phone}%0A%0Aتفاصيل الاستشارة:%0A${message}`;
+                
+                // Open WhatsApp with the message
+                window.open(`https://wa.me/963992126395?text=${whatsappMessage}`, '_blank');
+                
+                // Show success message
+                const submitBtn = consultationForm.querySelector('.btn');
+                const originalBtnText = submitBtn.innerHTML;
+                
+                submitBtn.innerHTML = '<i class="fas fa-check"></i> تم فتح واتساب!';
+                submitBtn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                
+                setTimeout(() => {
+                    consultationForm.reset();
+                    submitBtn.innerHTML = originalBtnText;
+                    submitBtn.style.background = '';
+                }, 3000);
             });
         }
         
